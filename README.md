@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Student Learning Dashboard
 
-## Getting Started
+A modern learning dashboard built with Next.js, Supabase, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+The goal of this project was to create a smooth and responsive student dashboard experience with a Bento-style layout, animated interactions, and server-side data fetching.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- Bento grid dashboard layout
+- Server-side data fetching with Supabase
+- Dynamic course cards from database
+- Animated progress bars
+- Framer Motion staggered animations
+- Interactive sidebar navigation
+- Activity heatmap section
+- Loading skeletons
+- Responsive design for desktop, tablet, and mobile
+- Error handling for failed data requests
+
+## Tech Stack
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Supabase
+- Lucide React
+
+## Project Structure
+
+```txt
+app/
+├── components/
+├── lib/
+├── types/
+├── loading.tsx
+├── error.tsx
+└── page.tsx
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Architecture Decisions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+I used Next.js Server Components to fetch course data directly from Supabase. This keeps database access on the server and avoids exposing unnecessary logic to the client.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Interactive elements such as the sidebar, course cards, and animations were implemented as Client Components using Framer Motion.
 
-## Learn More
+The dashboard is divided into reusable components to keep the codebase organized and easier to maintain.
 
-To learn more about Next.js, take a look at the following resources:
+## Loading & Error Handling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A dedicated loading state is provided through `loading.tsx` with animated skeleton placeholders while data is being fetched.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+An error boundary is also included to gracefully handle Supabase connection failures.
 
-## Deploy on Vercel
+## Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create a `.env.local` file and add:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
+
+## Challenges
+
+One of the main challenges was balancing visual animations with performance. I focused on using transform-based animations (scale, opacity, translate) to avoid layout shifts and keep interactions smooth.
+
+Another challenge was creating a responsive Bento layout that adapts well across desktop, tablet, and mobile screen sizes.
+
+## Deployment
+
+The application is deployed on Vercel.
